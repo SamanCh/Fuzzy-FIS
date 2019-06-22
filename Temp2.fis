@@ -1,0 +1,56 @@
+[System]
+Name='Temp2'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=1
+NumRules=4
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='InTemp'
+Range=[50 90]
+NumMFs=3
+MF1='cool':'trapmf',[50 50 60 70]
+MF2='comfortable':'trimf',[60 70 80]
+MF3='too-warm':'trapmf',[70 80 90 90]
+
+[Input2]
+Name='OutTemp'
+Range=[30 110]
+NumMFs=5
+MF1='very-cool':'trimf',[10 30 50]
+MF2='chily':'trimf',[30 50 70]
+MF3='warm':'trimf',[50 70 90]
+MF4='very-warm':'trimf',[70 90 110]
+MF5='hot':'trimf',[90 110 130]
+
+[Input3]
+Name='DeltaInTemp'
+Range=[-6 6]
+NumMFs=5
+MF1='large-neg':'trapmf',[-6 -6 -4 -2]
+MF2='small-neg':'trimf',[-4 -2 0]
+MF3='near-zero':'trimf',[-2 0 2]
+MF4='small-pos':'trimf',[0 2 4]
+MF5='large-positie':'trapmf',[2 4 6 6]
+
+[Output1]
+Name='FlowChange'
+Range=[-3 3]
+NumMFs=5
+MF1='decrease-greately':'trapmf',[-3 -3 -2 -1]
+MF2='decrease-slightly':'trimf',[-2 -1 0]
+MF3='no-change':'trimf',[-1 0 1]
+MF4='icrease-slightly':'trimf',[0 1 2]
+MF5='increase-greatly':'trapmf',[1 2 3 3]
+
+[Rules]
+2 0 3, 3 (1) : 1
+0 2 2, 4 (1) : 1
+3 0 5, 1 (1) : 1
+1 0 3, 4 (1) : 1
